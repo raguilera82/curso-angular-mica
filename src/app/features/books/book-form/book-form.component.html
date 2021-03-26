@@ -1,0 +1,25 @@
+<form [formGroup]="formBook">
+  <label>Identificador</label>
+  <input type="text" formControlName="identificador" />
+  <label>Título</label>
+  <input type="text" formControlName="titulo" />
+  <p
+    *ngIf="
+      formBook.get('titulo').dirty &&
+      formBook.get('titulo').hasError('required')
+    "
+  >
+    El titulo es requerido
+  </p>
+  <p
+    *ngIf="
+      formBook.get('titulo').dirty &&
+      formBook.get('titulo').hasError('titleTaken')
+    "
+  >
+    El titulo esta pillado
+  </p>
+  <label>Sinopsis</label>
+  <input type="text" formControlName="sinopsis" />
+  <button (click)="onSend()" [disabled]="!formBook.valid">Send</button>
+</form>
