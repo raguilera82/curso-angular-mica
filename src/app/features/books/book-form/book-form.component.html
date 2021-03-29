@@ -1,25 +1,58 @@
-<form [formGroup]="formBook">
-  <label>Identificador</label>
-  <input type="text" formControlName="identificador" />
-  <label>Título</label>
-  <input type="text" formControlName="titulo" />
-  <p
-    *ngIf="
-      formBook.get('titulo').dirty &&
-      formBook.get('titulo').hasError('required')
-    "
-  >
-    El titulo es requerido
-  </p>
-  <p
-    *ngIf="
-      formBook.get('titulo').dirty &&
-      formBook.get('titulo').hasError('titleTaken')
-    "
-  >
-    El titulo esta pillado
-  </p>
-  <label>Sinopsis</label>
-  <input type="text" formControlName="sinopsis" />
-  <button (click)="onSend()" [disabled]="!formBook.valid">Send</button>
-</form>
+<div *ngIf="vm$ | async as vm">
+  <form [formGroup]="formBook">
+    <div>
+      <label for="identificador">Identificador</label>
+      <div>
+        <input type="text" id="identificador" formControlName="identificador" />
+      </div>
+    </div>
+
+    <div>
+      <label for="titulo">Título</label>
+      <div>
+        <input type="text" id="titulo" formControlName="titulo" />
+      </div>
+    </div>
+
+    <div>
+      <label for="sinopsis">Sinopsis</label>
+      <div>
+        <input type="text" id="sinopsis" formControlName="sinopsis" />
+      </div>
+      <p *ngIf="formBook.get('sinopsis').hasError('startWithNumber')">
+        La sinopsis no puede empezar por número
+      </p>
+    </div>
+
+    <div>
+      <button
+        *ngIf="action === actionForm.SAVE"
+        (click)="save()"
+        [disabled]="!formBook.valid"
+        id="save"
+      >
+        Guardar
+      </button>
+      <button
+        *ngIf="action === actionForm.EDIT"
+        (click)="edit()"
+        [disabled]="!formBook.valid"
+        id="edit"
+      >
+        Editar
+      </button>
+      <button
+        *ngIf="action === actionForm.DELETE"
+        (click)="delete()"
+        id="delete"
+      >
+        Eliminar
+      </button>
+      <button (click)="reset()" id="reset">Cancelar</button>
+    </div>
+
+    {{ formBook.status }}
+
+    {{ formBook.value | json }}
+  </form>
+</div>

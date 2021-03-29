@@ -1,0 +1,12 @@
+<button (click)="actionNew()" id="new">Nuevo</button>
+<app-book-form [action]="action"></app-book-form>
+
+<div *ngIf="vm$ | async as vm">
+  <div>Lista de libros</div>
+
+  <div *ngFor="let book of vm.booksState?.elems">
+    <p>{{ book.titulo }} / {{ book.sinopsis }}</p>
+    <button (click)="actionEdit(book)" id="actionEdit">Editar</button>
+    <button (click)="actionDelete(book)" id="actionDelete">Borrar</button>
+  </div>
+</div>

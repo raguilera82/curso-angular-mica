@@ -1,3 +1,6 @@
-<a routerLink="books">Books</a>
+<div *ngIf="vm$ | async as vm">
+  <p *ngIf="vm.messageState?.msg">{{ vm.messageState.msg }}</p>
 
-<router-outlet></router-outlet>
+  <a routerLink="/books">Books</a>
+  <router-outlet></router-outlet>
+</div>
