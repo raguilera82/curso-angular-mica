@@ -1,5 +1,5 @@
 <div *ngIf="vm$ | async as vm">
-  <form [formGroup]="formBook">
+  <form [formGroup]="formBook" *ngIf="action != null">
     <div>
       <label for="identificador">Identificador</label>
       <div>

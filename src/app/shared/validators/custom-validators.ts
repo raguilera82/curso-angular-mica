@@ -4,7 +4,7 @@ export class CustomValidators {
 
     static startWithNumber(control: FormControl) {
 
-        let firstChar = control?.value.charAt(0);
+        let firstChar = control?.value?.charAt(0);
         if (firstChar && !isNaN(firstChar)) {
             return { 'startWithNumber': true };
         } else {
