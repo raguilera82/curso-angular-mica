@@ -39,7 +39,7 @@ export class BookFormComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     const disable: boolean = this.action === ActionForm.DELETE;
     this.formBook = new FormGroup({
       identificador: new FormControl({ value: '', disabled: true }),
