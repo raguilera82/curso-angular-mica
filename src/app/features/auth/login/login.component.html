@@ -1,0 +1,13 @@
+<form [formGroup]="formLogin">
+  <div>
+    <label for="username">Username</label>
+    <input id="username" formControlName="username" />
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input type="password" id="password" formControlName="password" />
+  </div>
+  <div>
+    <button (click)="send()" [disabled]="!formLogin.valid">Send</button>
+  </div>
+</form>

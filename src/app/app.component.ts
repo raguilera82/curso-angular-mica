@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthStoreService } from './features/auth/auth-store.service';
 import { BusService } from './shared/bus/bus.service';
 import { MessageState } from './shared/model';
 
@@ -17,5 +18,10 @@ export class AppComponent {
     map(([messageState]) => ({ messageState }))
   )
 
-  constructor(private busService: BusService) { }
+  constructor(private busService: BusService,
+    private authStore: AuthStoreService) { }
+
+  logout() {
+    this.authStore.setToken(null);
+  }
 }

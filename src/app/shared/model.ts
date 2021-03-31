@@ -12,3 +12,12 @@ export interface MessageState {
 export enum ActionForm {
     SAVE, EDIT, DELETE
 }
+
+export interface AuthToken {
+    token: string;
+}
+
+export interface Credentials {
+    username: string;
+    password: string;
+}

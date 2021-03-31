@@ -8,8 +8,7 @@ import { Store } from "../state/store";
 export class BusService extends Store<MessageState>{
 
     constructor() {
-        super();
-        this.init();
+        super('BUS');
     }
 
     init() {

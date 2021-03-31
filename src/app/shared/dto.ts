@@ -3,3 +3,7 @@ export interface BookDTO {
     title: string;
     description: string;
 }
+
+export interface AuthTokenDTO {
+    token: string;
+}

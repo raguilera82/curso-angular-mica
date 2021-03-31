@@ -10,8 +10,8 @@ describe('BooksComponent', () => {
   let component: BooksComponent;
   let fixture: ComponentFixture<BooksComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       declarations: [BooksComponent],
       providers: [
         { provide: BooksProxyService, useClass: BooksProxyServiceFake }
@@ -19,7 +19,7 @@ describe('BooksComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BooksComponent);

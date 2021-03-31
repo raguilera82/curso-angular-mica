@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ActionForm, Libro } from '../../../shared/model';
@@ -8,10 +8,10 @@ import { BooksStoreService } from '../books-store.service';
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
-  styleUrls: ['./books.component.css']
+  styleUrls: ['./books.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BooksComponent implements OnInit {
-
 
   booksState$: Observable<CrudState<Libro>> = this.store.get$();
   vm$ = combineLatest([this.booksState$]).pipe(
@@ -21,7 +21,9 @@ export class BooksComponent implements OnInit {
 
   constructor(public store: BooksStoreService) { }
 
-  ngOnInit() { }
+  async ngOnInit() {
+    await this.store.getElems();
+  }
 
   actionNew() {
     this.action = ActionForm.SAVE;
@@ -41,6 +43,5 @@ export class BooksComponent implements OnInit {
     this.action = ActionForm.DELETE;
     this.store.selectedElem(book);
   }
-
 
 }

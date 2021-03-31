@@ -1,8 +1,20 @@
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, fromEvent, Observable } from "rxjs";
 
 const win = window as any;
 
-export class Store<T> {
+export abstract class Store<T> {
+
+    constructor(public clazz: string) {
+
+        this.init();
+
+        fromEvent(window, 'beforeunload').subscribe(
+            () => this.save(`${this.clazz}_STATE`)
+        );
+
+        this.load(`${this.clazz}_STATE`);
+    }
+
 
     private state$: BehaviorSubject<T> = new BehaviorSubject(undefined);
 
@@ -34,6 +46,7 @@ export class Store<T> {
 
     }
 
+    abstract init(): void;
 
 
 }

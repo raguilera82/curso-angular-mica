@@ -1,19 +1,18 @@
-import { fromEvent } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Store } from '../store';
 import { Base, CrudRepository, CrudState } from './model';
 
 export class CrudStore<T extends Base> extends Store<CrudState<T>> {
 
-    constructor(public repository: CrudRepository<T>, private clazz: string) {
-        super();
-        this.getElems();
+    constructor(public repository: CrudRepository<T>, public clazz: string) {
+        super(clazz);
+    }
 
-        fromEvent(window, 'beforeunload').subscribe(
-            () => this.save(`${this.clazz}_STATE`)
-        );
-
-        this.load(`${this.clazz}_STATE`);
+    init() {
+        this.store(`${this.clazz}_INIT`, {
+            elems: [],
+            selectedElem: null
+        })
     }
 
     getElems(): Promise<T[]> {
